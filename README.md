@@ -47,5 +47,5 @@ The application allows users to browse products, add them to cart, and place ord
 
 ## 🏗️ Application SCREENSHOTS
 ### USERS POV OPERATIONS
-![images](images/img8)
+![screenshot of the application](images/img1.png)
 
