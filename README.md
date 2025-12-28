@@ -48,22 +48,50 @@ The application allows users to browse products, add them to cart, and place ord
 ## 🏗️ Application Screenshots
 ### USERS POV OPERATIONS
 ![screenshot of the application](images/img8.png)
+
+---
 ![screenshot of the application](images/img9.png)
+
+---
 ![screenshot of the application](images/img10.png)
+
+---
 ![screenshot of the application](images/img11.png)
+
+---
 ![screenshot of the application](images/img12.png)
+
+---
 ![screenshot of the application](images/img13.png)
+
+---
 ![screenshot of the application](images/img14.png)
+
+---
 ![screenshot of the application](images/img15.png)
 
 ### ADMIN POV OPERATIONS
 ![screenshot of the application](images/img1.png)
+
+---
 ![screenshot of the application](images/img2.png)
+
+---
 ![screenshot of the application](images/img3.png)
+
+---
 ![screenshot of the application](images/img4.png)
+
+---
 ![screenshot of the application](images/img5.png)
+
+---
 ![screenshot of the application](images/img6.png)
+
+---
 ![screenshot of the application](images/img7.png)
+
+---
 ![screenshot of the application](images/img8.png)
 ---
 
