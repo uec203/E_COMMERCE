@@ -92,8 +92,6 @@ The application allows users to browse products, add them to cart, and place ord
 ![screenshot of the application](images/img7.png)
 
 ---
-![screenshot of the application](images/img8.png)
----
 
 
 
