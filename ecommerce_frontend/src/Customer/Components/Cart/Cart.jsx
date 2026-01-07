@@ -9,15 +9,22 @@ const Cart = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cart = useSelector(store => store.cart);
+    const auth = useSelector(store => store.auth);
 
 
     const handleCheckout = () => {
         navigate("/checkout?step=2");
     }
 
+  useEffect(() => {
+    if (auth.user === null) {
+      navigate("/login");
+    }
+  }, [auth.user]); 
+
     useEffect(()=>{
         dispatch(getCart()) 
-    },[cart.updateCartItem,cart.deleteCartItem]);
+    },[cart.updateCartItem,auth?.user?.jwt,cart.deleteCartItem]);
 
     return (
         <div className='lg:grid grid-cols-3 lg:px-16 relative'>

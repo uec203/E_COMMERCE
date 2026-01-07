@@ -46,15 +46,16 @@ public class OrderController {
 	public ResponseEntity<List<Order>> usersOrderHistory(@RequestHeader("Authorization") String jwt) throws UserException{
 		User user = userService.findUserProfileByJwt(jwt);
 		List<Order> orders = orderService.userOrderHistory(user.getId()); 
-		return new ResponseEntity<>(orders,HttpStatus.CREATED);
+		return new ResponseEntity<>(orders,HttpStatus.ACCEPTED);
 	}
 	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Order> findOrderById(@PathVariable("id") Long orderId,@RequestHeader("Authorization") String jwt) throws UserException, OrderException{
 		User user = userService.findUserProfileByJwt(jwt);
-		Order order = orderService.findOrderById(user.getId()); 
-		return new ResponseEntity<>(order,HttpStatus.CREATED);
+		Order order = orderService.findOrderById(orderId); 
+		if(user == order.getUser())return new ResponseEntity<>(order,HttpStatus.CREATED);
+		return new ResponseEntity<>(null,HttpStatus.FORBIDDEN);
 	}
 	
 }

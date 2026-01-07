@@ -19,6 +19,8 @@ import com.company.model.Product;
 import com.company.repository.CategoryRepository;
 import com.company.repository.ProductRepository;
 import com.company.request.CreateProductRequest;
+import com.company.request.FilterRequest;
+import com.company.response.FilterResponse;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -134,36 +136,15 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public Page<Product> getAllProducts(String cagetory, List<String> colors, List<String> sizes, Integer minPrice,
-			Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize) {
+	public FilterResponse getAllProducts(FilterRequest req) {
+		Pageable pageable = PageRequest.of(req.getPageNumber(), req.getPageSize());
+
+		Page<Product> page = productRepository.filterProduct(req.getCategoryThree(),req.getCategoryTwo(),
+				req.getCategoryThree(),req.getMinPrice(),req.getMaxPrice(),req.getMaxDiscount(),req.getSort(),pageable);
 		
-		Pageable pageable = PageRequest.of(pageNumber, pageSize);
-		 
-		List<Product> products = productRepository.filterProduct(cagetory, minPrice, maxPrice, minDiscount, sort);
-		System.out.print(products.size());
-		
-		if(!colors.isEmpty()) {
-			products = products.stream().filter(p->colors.stream().anyMatch(c->c.equalsIgnoreCase(p.getColor()))).collect(Collectors.toList());
-		}
-		
-		if(stock!=null) {
-			if(stock.equals("in_stock")) {
-				products=products.stream().filter(p->p.getQuantity()>0).collect(Collectors.toList());
-			}
-			else if(stock.equals("out_of_stock")) {
-				products=products.stream().filter(p->p.getQuantity()==0).collect(Collectors.toList());
-			}
-		}
-		
-		int startIndex = (int) pageable.getOffset();
-		int endIndex = Math.min(startIndex+pageable.getPageSize(), products.size());
-		
-		List<Product> pageContent = products.subList(startIndex, endIndex);
-		
-		Page<Product> filteredProducts = new PageImpl<>(pageContent,pageable,products.size());
-		
-		return filteredProducts;
+		return new FilterResponse(page,page.getTotalPages());
 	}
+	
 
 	@Override
 	public List<Product> findAllProducts() {

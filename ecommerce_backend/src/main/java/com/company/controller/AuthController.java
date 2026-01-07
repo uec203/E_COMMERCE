@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.company.exception.UserException;
-import com.company.model.User;
 import com.company.request.LoginRequest;
 import com.company.request.RegisterRequest;
 import com.company.response.AuthResponse;

@@ -1,4 +1,4 @@
-import { CREATE_PRODUCT_FAILURE, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, FIND_PRODUCT_BY_ID_FAILURE, FIND_PRODUCT_BY_ID_SUCCESS, FIND_PRODUCTS_FAILURE, FIND_PRODUCTS_REQUEST, FIND_PRODUCTS_SUCCESS, LOAD_PRODUCTS_BY_CATEGORY_FAILURE, LOAD_PRODUCTS_BY_CATEGORY_REQUEST, LOAD_PRODUCTS_BY_CATEGORY_SUCCESS } from "./ActionTyps";
+import { CREATE_PRODUCT_FAILURE, CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, FIND_PRODUCT_BY_ID_FAILURE, FIND_PRODUCT_BY_ID_SUCCESS, FIND_PRODUCTS_FAILURE, FIND_PRODUCTS_REQUEST, FIND_PRODUCTS_SUCCESS, GET_PRODUCTSBYFILTER_FAILURE, GET_PRODUCTSBYFILTER_REQUEST, GET_PRODUCTSBYFILTER_SUCCESS, LOAD_PRODUCTS_BY_CATEGORY_FAILURE, LOAD_PRODUCTS_BY_CATEGORY_REQUEST, LOAD_PRODUCTS_BY_CATEGORY_SUCCESS } from "./ActionTyps";
 import { api,API_BASE_URL} from "../../config/apiConfig";
 import { GET_CATEGORIES_FAILURE, GET_CATEGORIES_REQUEST, GET_CATEGORIES_SUCCESS } from "./ActionTyps";
 
@@ -69,6 +69,18 @@ export const getCategories = () => async (dispatch) => {
         console.log("Fetched categories data:", data);  
         dispatch({ type: GET_CATEGORIES_SUCCESS, payload: data });
     } catch (error) {
-        dispatch({ type: GET_CATEGORIES_FAILURE, payload: error.message });
+        dispatch({ type: GET_CATEGORIES_FAILURE, payload: error.message});
     }   
+}
+
+export const getProductsByFilter = (data) => async (dispatch) => {
+    dispatch({type: GET_PRODUCTSBYFILTER_REQUEST});
+    try {
+        console.log("Filter inside try:", data);
+        const {result} = await api.get(`public/api/products/filter`, {params: data});
+        dispatch({type: GET_PRODUCTSBYFILTER_SUCCESS,payload: result})
+
+    } catch (error) {
+        dispatch({type: GET_PRODUCTSBYFILTER_FAILURE, payload: error.message })
+    }
 }

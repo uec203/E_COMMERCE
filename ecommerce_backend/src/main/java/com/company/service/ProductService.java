@@ -2,12 +2,12 @@ package com.company.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-
 import com.company.exception.ProductException;
 import com.company.model.Category;
 import com.company.model.Product;
 import com.company.request.CreateProductRequest;
+import com.company.request.FilterRequest;
+import com.company.response.FilterResponse;
 
 public interface ProductService {
 
@@ -21,8 +21,7 @@ public interface ProductService {
 	
 	List<Product> findProductsByCagetory(String category);
 	
-	Page<Product> getAllProducts(String cagetory,List<String> colors,List<String> sizes,Integer minPrice,Integer maxPrice
-			,Integer minDiscount,String sort,String stock,Integer pageNumber,Integer pageSize);
+	FilterResponse getAllProducts(FilterRequest request);
 	
 	List<Product> findAllProducts();
 	
